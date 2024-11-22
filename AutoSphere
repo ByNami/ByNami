@@ -91,22 +91,17 @@ Tabs.Infor:AddParagraph({
 
 
 function GetRemoteEvent()
-    -- Itera por todos os filhos do ReplicatedStorage
     for _, child in ipairs(game.ReplicatedStorage:GetChildren()) do
         if child:IsA("Folder") then
-            -- Itera por todos os filhos dentro das pastas (Folders)
             for _, remote in ipairs(child:GetChildren()) do
                 if remote:IsA("RemoteEvent") then
-                    return remote  -- Retorna o RemoteEvent encontrado
+                    return remote
                 end
             end
         end
     end
-    return nil  -- Retorna nil caso nenhum RemoteEvent seja encontrado
+    return nil
 end
-
-
-
 
 
 local Remote = GetRemoteEvent()
