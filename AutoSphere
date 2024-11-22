@@ -91,20 +91,33 @@ Tabs.Infor:AddParagraph({
 
 
 function GetRemoteEvent()
-    for _, child in ipairs(game.ReplicatedStorage:GetChildren()) do
+    local replicatedStorage = game:GetService("ReplicatedStorage")
+    
+    -- Itera sobre os filhos do ReplicatedStorage
+    for _, child in ipairs(replicatedStorage:GetChildren()) do
         if child:IsA("Folder") then
+            -- Itera sobre os filhos da pasta
             for _, remote in ipairs(child:GetChildren()) do
                 if remote:IsA("RemoteEvent") then
-                    return remote
+                    return remote -- Retorna o primeiro RemoteEvent encontrado
                 end
             end
         end
     end
-    return nil
+    return nil -- Retorna nil se nenhum RemoteEvent for encontrado
+end
+
+-- Usa a função para obter o RemoteEvent
+local remoteEvent = GetRemoteEvent()
+
+if remoteEvent then
+    print("RemoteEvent encontrado:", remoteEvent.Name)
+else
+    warn("Nenhum RemoteEvent encontrado.")
 end
 
 
-local Remote = GetRemoteEvent()
+
 
 local codes = {
     "mercuriinjusticado", "10klikes", "update4", "3mvisits", "50kmembers", 
@@ -118,6 +131,8 @@ local codes = {
     "5kplayers", "midaodaempada", "midaodosuco", "midaodotaicondor", 
     "midaodopastel", "2klikes", "srrydelay", "srryping"
 }
+
+local Remote = GetRemoteEvent()
 
 local button = Tabs.Player:AddButton({
     Title = "Redeem All Codes",
